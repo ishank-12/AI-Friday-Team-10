@@ -1,0 +1,47 @@
+1. Core Application Framework
+Python (v3.10 - v3.12): The foundational programming language for the entire backend, logic, and data processing.
+
+Streamlit (v1.32.0+): The pure-Python web framework used to render the frontend. We relied heavily on its modern features, specifically:
+
+st.data_editor: For the interactive Priority Queue grid.
+
+st.chat_message & st.chat_input: For the native AI Advisor chat interface.
+
+st.write_stream: To create the typewriter effect for the AI's responses.
+
+2. Data Intelligence & Processing
+Pandas (v2.2.0+): The backbone of the Data Intelligence Layer. Used to store the RAW_MACHINES dataset in-memory, process the Risk Engine algorithms, and handle the ingestion of external CSV files.
+
+NumPy (v1.26.0+): Used for mathematical operations and synthetic data generation (e.g., generating the random API webhook payloads and anomaly spikes).
+
+3. Data Visualization
+Plotly Express (v5.19.0+): Used to render the "Equipment Health Map." Plotly was chosen over standard Streamlit charts because it natively supports dynamic bubble sizes (mapped to our Cost of Delay metric), custom color mapping for risk tiers, and interactive hover states.
+
+4. Generative AI & Orchestration
+LangChain Core (langchain-core v0.1.30+): Used to structure the prompt engineering. We utilized SystemMessage, HumanMessage, and AIMessage to maintain the strict conversational context required for the AI Advisor.
+
+LangChain OpenAI (langchain-openai v0.0.8+): The specific wrapper used to connect to your custom LLM endpoint, allowing us to easily enable the streaming=True parameter.
+
+DeepSeek-V3 (azure_ai/genailab-maas-DeepSeek-V3-0324): The actual Large Language Model powering the conversational intelligence, hosted via the TCS GenAI Lab API.
+
+5. Networking & Integration
+HTTPX (v0.27.0+): A fully featured HTTP client for Python. We explicitly injected this into the LangChain setup (httpx.Client(verify=False)) to bypass local SSL certificate verification restrictions when communicating with the TCS GenAI Lab endpoint.
+
+Native Python Modules: * io: Used to dynamically generate the downloadable CSV template in memory without saving it to the disk.
+
+datetime: Used to calculate the exact calendar dates for recommended maintenance based on the Risk Engine's hourly outputs.
+
+6. Frontend UI/UX (Injected)
+HTML5 / CSS3: Because Streamlit is visually rigid, we bypassed standard components using st.markdown(..., unsafe_allow_html=True). This allowed us to inject advanced CSS to create the "Glass & Slate" aesthetic, hover-lift animations, and colored KPI borders.
+
+Hackathon Ready requirements.txt
+If you need to submit a repository or set this up on a new machine for the demo, you can use this exact block:
+
+Plaintext
+streamlit>=1.32.0
+pandas>=2.2.0
+numpy>=1.26.0
+plotly>=5.19.0
+httpx>=0.27.0
+langchain-openai>=0.0.8
+langchain-core>=0.1.30
