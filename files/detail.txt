@@ -1,0 +1,84 @@
+Project Name: MaintainIQ Commander
+Tagline: Moving manufacturing from reactive repairs to proactive intelligence.
+
+1. The Problem Statement
+Manufacturing plants face a critical operational bottleneck: scheduling timely equipment maintenance. Currently, this process relies heavily on manual logs, calendar reminders, and human intuition.
+
+The Result: Missed servicing windows, leading to unexpected equipment breakdowns.
+
+The Impact: Severe reductions in production efficiency, costly unplanned outages, and inflated operational expenses.
+
+The Gap: Existing systems are reactive. They lack the automated data ingestion and predictive insights required to prioritize maintenance based on actual risk and financial impact.
+
+2. Solution Expectations (The Hackathon Prompt)
+The challenge required building an AI assistant prototype that could:
+
+Ingest structured equipment usage logs, historical records, and manufacturer guidelines.
+
+Process this data to generate clear, prioritized maintenance schedules.
+
+Provide an intuitive UI with user adjustment capabilities.
+
+Include basic API integration to support scalability and real-time updates.
+
+Demonstrate measurable success through recommendation relevance and potential downtime reduction.
+
+3. Our Proposed Solution: MaintainIQ
+MaintainIQ is a "Maintenance Operations Commander." It is not just a dashboard; it is an intelligent, reactive engine that calculates real-time failure probabilities and translates them into tangible financial metrics (Cost of Delay). It bridges the gap between raw machine data and executive decision-making.
+
+Key Differentiators (Why this wins):
+Financial Grounding: We don't just say a machine is "Critical." We calculate the exact estimated daily cost if the maintenance is delayed.
+
+Dynamic, Not Static: Unlike standard dashboards, MaintainIQ reacts to live API webhooks and allows users to inject synthetic anomalies (stress-testing) to see how the AI dynamically re-routes priorities.
+
+Conversational Context: The AI Advisor doesn't just answer generic questions; it actively reads the live, ingested dataset to provide mathematically backed recommendations.
+
+4. Core Features & Architecture
+The application is divided into four distinct operational views:
+
+🏭 Command Center: A live, high-level map of the factory floor. Features a composite "Fleet Risk Score" and an interactive scatter plot plotting equipment hours against composite risk.
+
+📋 Priority Queue (Human-in-the-Loop): An AI-ranked schedule board where managers can review the AI's suggested maintenance dates and manually override them directly in the database grid, ensuring human oversight.
+
+📂 Data & API Hub: The ingestion engine. Allows users to download CSV templates, upload new operational logs, and simulate real-time IoT webhook payloads to prove scalability.
+
+🤖 AI Advisor: An embedded, context-aware chatbot powered by DeepSeek-V3. It continuously reads the live equipment state and acts as a conversational consultant for the plant manager.
+
+5. The Technical Stack
+Frontend/UI: Streamlit (Python) enhanced with custom CSS for a premium, glass-and-slate modern dashboard aesthetic.
+
+Data Processing Engine: Pandas & NumPy for real-time risk calculations and synthetic data generation.
+
+Data Visualization: Plotly Express for interactive, transparent-background scatter plots and charts.
+
+AI & LLM Integration: LangChain framework connecting to the DeepSeek-V3 model via the TCS GenAI Lab API.
+
+API Handling: httpx for secure REST communications and payload simulations.
+
+6. How the AI and Algorithms Work
+Our solution uses a two-pronged intelligence approach:
+
+A. The Deterministic Risk Engine (Mathematical AI)
+Before the LLM even speaks, our Python backend calculates a Composite Risk Score (0-100%) for every machine using a weighted algorithm:
+
+35% Overdue Ratio: (Days since last service / Manufacturer Interval)
+
+20% Usage Intensity: How hard the machine is being pushed daily.
+
+20% Historical Risk: A dynamic penalty based on the number of past unexpected failures.
+
+15% Age Degradation: Normalized against the machine's expected lifecycle.
+
+10% Total Hours: Cumulative wear and tear.
+
+B. The Generative AI Advisor (DeepSeek-V3)
+Using LangChain, we inject the live output of the Risk Engine directly into the LLM's system prompt. When a user asks a question, the LLM analyzes the real-time grid (including newly ingested CSVs or API webhooks) to provide contextual, cost-aware advice.
+
+7. Future Scope & Scalability
+While the prototype relies on synthetic data and API simulation, the architecture is ready for enterprise integration:
+
+Live IoT Sensor Integration: Replacing the "API Simulation" webhook with actual MQTT streams from physical vibration and temperature sensors.
+
+ERP / Supply Chain Hookups: Integrating with SAP or Oracle to check if the required spare parts (e.g., replacement seals) are actually in the warehouse before the AI schedules the downtime.
+
+Automated Work Order Generation: Allowing the AI Advisor to not just recommend a schedule, but actually generate and email the PDF work order to the assigned technician.
